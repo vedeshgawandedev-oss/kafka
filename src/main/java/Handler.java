@@ -30,13 +30,13 @@ public class Handler {
                         out.write(ByteBuffer.allocate(4).putInt(19).array());
                         writeInt(out, corelation_id); // correlation id
                         writeShort(out, (short) 0); // error code
-                        writeByte(out, (byte) 3); // array length
+                        writeByte(out, (byte) 2); // array length
                         writeShort(out, (short)18); // api key
                         writeShort(out, (short)0); // min api version
                         writeShort(out, (short)16); // max api version
                         writeByte(out, (byte)0); // tag buffer
-                        writeInt(out, 0); // throttle time
-                        writeByte(out, (byte)0); // tag buffer
+                        writeShort(out, (short)0); // api key
+                        writeShort(out, (short)0); // min api version
                         out.flush();
                     }else if(request_api_key == 1){
                         out.write(ByteBuffer.allocate(4).putInt(10).array());
