@@ -48,10 +48,11 @@ public class Handler {
 
                     }else if(request_api_key == 1){
                         // write response for api_key = 1 (Fetch)
-                        out.write(ByteBuffer.allocate(4).putInt(16).array());
+                        out.write(ByteBuffer.allocate(4).putInt(15).array());
                         writeInt(out, corelation_id);
+                        writeInt(out, 0); // throttle time
                         writeShort(out, (short)0); // error code
-                        writeInt(out, 123456); // high watermark
+                        writeInt(out, 0); // session id
                         writeByte(out, (byte)0); // tag buffer
                         out.flush();
                     }else{
