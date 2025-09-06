@@ -2,6 +2,8 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import static jdk.nio.zipfs.ZipUtils.writeShort;
+
 public class Main {
   public static void main(String[] args){
     // You can use print statements as follows for debugging, they'll be visible when running tests.
@@ -40,7 +42,7 @@ public class Main {
              System.out.println("Unsupported api_version: " + request_api_version);
              writeInt(out, message_size);
              writeInt(out, corelation_id);
-             writeInt(out, 35);
+             writeShort(out, (short)35);
              out.flush();
          } else {
              writeInt(out, message_size);
