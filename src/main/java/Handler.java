@@ -37,6 +37,8 @@ public class Handler {
                         writeByte(out, (byte)0); // tag buffer
                         writeInt(out, 0); // throttle time
                         writeByte(out, (byte)0); // tag buffer
+                        writeShort(out, (short)0); // api key
+                        writeShort(out, (short)0); // min api version
                         out.flush();
                     }else if(request_api_key == 1){
                         // write response for api_key = 1 (Fetch)
