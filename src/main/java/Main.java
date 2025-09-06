@@ -35,12 +35,17 @@ public class Main {
 //            int toRead = reqSize - 2 - 2 - 4 - 2 - request_client_id_length;
 
 
-
-
-       OutputStream out = clientSocket.getOutputStream();
-       writeInt(out, message_size);
-         writeInt(out, corelation_id);
-         out.flush();
+         OutputStream out = clientSocket.getOutputStream();
+         if(request_api_version<0 || request_api_version>4){
+             writeInt(out, message_size);
+             writeInt(out, corelation_id);
+             writeInt(out, 35);
+             out.flush();
+         } else {
+             writeInt(out, message_size);
+             writeInt(out, corelation_id);
+             writeInt(out, 0);
+         }
      } catch (IOException e) {
        System.out.println("IOException: " + e.getMessage());
      } finally {
