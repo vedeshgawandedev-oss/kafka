@@ -43,14 +43,16 @@ public class Main {
              writeShort(out, (short)35);
              out.flush();
          } else {
-             writeInt(out,15 );
+             writeInt(out,19 );
              writeInt(out, corelation_id);
              writeShort(out, (short) 0); // error code
-             writeShort(out, (short) 1); // array length
+             writeByte(out, (byte) 2); // array length
              writeShort(out, (short)18); // api key
-             writeShort(out, (short)4); // min api version
-             writeShort(out, (short)0); // max api version
-             writeByte(out, (byte)1); // tag buffer
+             writeShort(out, (short)0); // min api version
+             writeShort(out, (short)4); // max api version
+             writeByte(out, (byte)0); // tag buffer
+             writeInt(out, 0); // throttle time
+             writeByte(out, (byte)0); // tag buffer
 
              out.flush();
          }
