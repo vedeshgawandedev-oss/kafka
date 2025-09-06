@@ -2,8 +2,6 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import static jdk.nio.zipfs.ZipUtils.writeShort;
-
 public class Main {
   public static void main(String[] args){
     // You can use print statements as follows for debugging, they'll be visible when running tests.
@@ -67,6 +65,10 @@ public class Main {
         // Network byte order = big-endian
         out.write((value >>> 24) & 0xFF);
         out.write((value >>> 16) & 0xFF);
+        out.write((value >>> 8) & 0xFF);
+        out.write(value & 0xFF);
+    }
+    public static void writeShort(OutputStream out, int value) throws IOException{
         out.write((value >>> 8) & 0xFF);
         out.write(value & 0xFF);
     }
