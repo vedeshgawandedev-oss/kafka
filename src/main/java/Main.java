@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -20,9 +21,10 @@ public class Main {
        // Wait for connection from client.
        clientSocket = serverSocket.accept();
        int message_size = 0, corelation_id = 7;
-       clientSocket.getOutputStream().write(message_size);
-       clientSocket.getOutputStream().write(corelation_id);
-       clientSocket.getOutputStream().flush();
+       OutputStream out = clientSocket.getOutputStream();
+       writeInt(out, message_size);
+         writeInt(out, corelation_id);
+         out.flush();
      } catch (IOException e) {
        System.out.println("IOException: " + e.getMessage());
      } finally {
@@ -35,4 +37,12 @@ public class Main {
        }
      }
   }
+
+    public static void writeInt(OutputStream out, int value) throws IOException {
+        // Network byte order = big-endian
+        out.write((value >>> 24) & 0xFF);
+        out.write((value >>> 16) & 0xFF);
+        out.write((value >>> 8) & 0xFF);
+        out.write(value & 0xFF);
+    }
 }
