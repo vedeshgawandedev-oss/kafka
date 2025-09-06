@@ -26,19 +26,22 @@ public class Handler {
                         writeInt(out, corelation_id);
                         writeShort(out, (short)35);
                         out.flush();
-                    } else if(request_api_key == 18){
+                    } else if(request_api_key == 26){
                         out.write(ByteBuffer.allocate(4).putInt(19).array());
                         writeInt(out, corelation_id);
                         writeShort(out, (short) 0); // error code
                         writeByte(out, (byte) 3); // array length
+
                         writeShort(out, (short)18); // api key
                         writeShort(out, (short)0); // min api version
                         writeShort(out, (short)4); // max api version
                         writeByte(out, (byte)0); // tag buffer
+
                         writeShort(out, (short)18); // api key
                         writeShort(out, (short)0); // min api version
                         writeShort(out, (short)4); // max api version
                         writeByte(out, (byte)0); // tag buffer
+
                         writeInt(out, 0); // throttle time
                         writeByte(out, (byte)0); // tag buffer
                         out.flush();
