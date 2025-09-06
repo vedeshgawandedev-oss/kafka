@@ -21,7 +21,7 @@ public class Main {
        clientSocket = serverSocket.accept();
        int message_size = 0, corelation_id = 7;
 
-         DataInputStream in = new DataInputStream(clientSocket.getInputStream();
+         DataInputStream in = new DataInputStream(clientSocket.getInputStream());
          int reqSize = in.readInt();
          short request_api_key = in.readShort();
             short request_api_version = in.readShort();
