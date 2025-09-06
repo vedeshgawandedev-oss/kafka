@@ -26,18 +26,13 @@ public class Main {
        while(true){
            int message_size = 0, corelation_id = 7;
 
-
-           int reqSize = in.readInt();
+           message_size = in.readInt();
            short request_api_key = in.readShort();
            short request_api_version = in.readShort();
            int request_correlation_id = in.readInt();
-           int request_client_id_length = in.readShort();
-           byte[] request_client_id = new byte[request_client_id_length];
-           in.readFully(request_client_id);
-           //            message_size = reqSize + 4;
-           corelation_id = request_correlation_id;
-           // read the rest of the request
-           //            int toRead = reqSize - 2 - 2 - 4 - 2 - request_client_id_length;
+           // read remaining bytes in the request
+              byte[] request_client_id = new byte[message_size - 8];
+              in.readFully(request_client_id);
 
 //           System.out.println("Received request: api_key=" + request_api_key + ", api_version=" + request_api_version + ", correlation_id=" + request_correlation_id + ", client_id=" + new String(request_client_id));
            if(request_api_version<0 || request_api_version>4){
