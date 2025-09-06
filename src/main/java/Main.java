@@ -29,13 +29,12 @@ public class Main {
            short request_api_key = in.readShort();
            short request_api_version = in.readShort();
            int corelation_id = in.readInt();
-           // read remaining bytes in the request
-              byte[] request_client_id = new byte[message_size - 8];
-              in.readFully(request_client_id);
+           byte[] remaining_bytes = new byte[message_size - 8];
+           in.readFully(remaining_bytes);
 
-//           System.out.println("Received request: api_key=" + request_api_key + ", api_version=" + request_api_version + ", correlation_id=" + request_correlation_id + ", client_id=" + new String(request_client_id));
+           //  System.out.println("Received request: api_key=" + request_api_key + ", api_version=" + request_api_version + ", correlation_id=" + request_correlation_id + ", client_id=" + new String(request_client_id));
            if(request_api_version<0 || request_api_version>4){
-               System.out.println("Unsupported api_version: " + request_api_version);
+               // System.out.println("Unsupported api_version: " + request_api_version);
                writeInt(out, 0);
                writeInt(out, corelation_id);
                writeShort(out, (short)35);
@@ -51,7 +50,6 @@ public class Main {
                writeByte(out, (byte)0); // tag buffer
                writeInt(out, 0); // throttle time
                writeByte(out, (byte)0); // tag buffer
-
                out.flush();
            }
        }
