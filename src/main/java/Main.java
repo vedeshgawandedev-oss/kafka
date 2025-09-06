@@ -44,8 +44,7 @@ public class Main {
              writeShort(out, (short)35);
              out.flush();
          } else {
-             writeInt(out, (int)19);
-//             out.write(ByteBuffer.allocate(4).putInt(19).array());
+             out.write(ByteBuffer.allocate(4).putInt(19).array());
              writeInt(out, corelation_id);
              writeShort(out, (short) 0); // error code
              writeByte(out, (byte) 2); // array length
