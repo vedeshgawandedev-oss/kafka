@@ -5,7 +5,7 @@ import java.io.OutputStream;
 import java.nio.ByteBuffer;
 
 public class Handler {
-    public static void execute(DataInputStream in, OutputStream out) {
+    public void execute(DataInputStream in, OutputStream out) {
         while(true){
             try{
                 int message_size = in.readInt();
