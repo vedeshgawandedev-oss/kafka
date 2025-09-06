@@ -20,43 +20,46 @@ public class Main {
        serverSocket.setReuseAddress(true);
        // Wait for connection from client.
        clientSocket = serverSocket.accept();
-       int message_size = 0, corelation_id = 7;
 
-         DataInputStream in = new DataInputStream(clientSocket.getInputStream());
-         int reqSize = in.readInt();
-         short request_api_key = in.readShort();
-            short request_api_version = in.readShort();
-            int request_correlation_id = in.readInt();
-            int request_client_id_length = in.readShort();
-            byte[] request_client_id = new byte[request_client_id_length];
-            in.readFully(request_client_id);
-//            message_size = reqSize + 4;
-            corelation_id = request_correlation_id;
-            // read the rest of the request
-//            int toRead = reqSize - 2 - 2 - 4 - 2 - request_client_id_length;
+       while(true){
+           int message_size = 0, corelation_id = 7;
 
-         System.out.println("Received request: api_key=" + request_api_key + ", api_version=" + request_api_version + ", correlation_id=" + request_correlation_id + ", client_id=" + new String(request_client_id));
-         OutputStream out = clientSocket.getOutputStream();
-         if(request_api_version<0 || request_api_version>4){
-             System.out.println("Unsupported api_version: " + request_api_version);
-             writeInt(out, 0);
-             writeInt(out, corelation_id);
-             writeShort(out, (short)35);
-             out.flush();
-         } else {
-             out.write(ByteBuffer.allocate(4).putInt(19).array());
-             writeInt(out, corelation_id);
-             writeShort(out, (short) 0); // error code
-             writeByte(out, (byte) 2); // array length
-             writeShort(out, (short)18); // api key
-             writeShort(out, (short)0); // min api version
-             writeShort(out, (short)4); // max api version
-             writeByte(out, (byte)0); // tag buffer
-             writeInt(out, 0); // throttle time
-             writeByte(out, (byte)0); // tag buffer
+           DataInputStream in = new DataInputStream(clientSocket.getInputStream());
+           int reqSize = in.readInt();
+           short request_api_key = in.readShort();
+           short request_api_version = in.readShort();
+           int request_correlation_id = in.readInt();
+           int request_client_id_length = in.readShort();
+           byte[] request_client_id = new byte[request_client_id_length];
+           in.readFully(request_client_id);
+           //            message_size = reqSize + 4;
+           corelation_id = request_correlation_id;
+           // read the rest of the request
+           //            int toRead = reqSize - 2 - 2 - 4 - 2 - request_client_id_length;
 
-             out.flush();
-         }
+           System.out.println("Received request: api_key=" + request_api_key + ", api_version=" + request_api_version + ", correlation_id=" + request_correlation_id + ", client_id=" + new String(request_client_id));
+           OutputStream out = clientSocket.getOutputStream();
+           if(request_api_version<0 || request_api_version>4){
+               System.out.println("Unsupported api_version: " + request_api_version);
+               writeInt(out, 0);
+               writeInt(out, corelation_id);
+               writeShort(out, (short)35);
+               out.flush();
+           } else {
+               out.write(ByteBuffer.allocate(4).putInt(19).array());
+               writeInt(out, corelation_id);
+               writeShort(out, (short) 0); // error code
+               writeByte(out, (byte) 2); // array length
+               writeShort(out, (short)18); // api key
+               writeShort(out, (short)0); // min api version
+               writeShort(out, (short)4); // max api version
+               writeByte(out, (byte)0); // tag buffer
+               writeInt(out, 0); // throttle time
+               writeByte(out, (byte)0); // tag buffer
+
+               out.flush();
+           }
+       }
      } catch (IOException e) {
        System.out.println("IOException: " + e.getMessage());
      } finally {
