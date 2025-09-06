@@ -37,6 +37,7 @@ public class Main {
          System.out.println("Received request: api_key=" + request_api_key + ", api_version=" + request_api_version + ", correlation_id=" + request_correlation_id + ", client_id=" + new String(request_client_id));
          OutputStream out = clientSocket.getOutputStream();
          if(request_api_version<0 || request_api_version>4){
+             System.out.println("Unsupported api_version: " + request_api_version);
              writeInt(out, message_size);
              writeInt(out, corelation_id);
              writeInt(out, 35);
