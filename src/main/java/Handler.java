@@ -26,8 +26,8 @@ public class Handler {
                         writeInt(out, corelation_id);
                         writeShort(out, (short)35);
                         out.flush();
-                    } else if(request_api_key == 26){
-                        out.write(ByteBuffer.allocate(4).putInt(19).array());
+                    } else if(request_api_key == 18){
+                        out.write(ByteBuffer.allocate(4).putInt(26).array());
                         writeInt(out, corelation_id);
                         writeShort(out, (short) 0); // error code
                         writeByte(out, (byte) 3); // array length
