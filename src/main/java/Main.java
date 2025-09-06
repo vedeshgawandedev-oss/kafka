@@ -24,32 +24,34 @@ public class Main {
        OutputStream out = clientSocket.getOutputStream();
          while(true){
              try{
-                 int message_size = in.readInt();
-                 short request_api_key = in.readShort();
-                 short request_api_version = in.readShort();
-                 int corelation_id = in.readInt();
-                 byte[] remaining_bytes = new byte[message_size - 8];
-                 in.readFully(remaining_bytes);
+                 if(in.available() > 0){
+                     int message_size = in.readInt();
+                     short request_api_key = in.readShort();
+                     short request_api_version = in.readShort();
+                     int corelation_id = in.readInt();
+                     byte[] remaining_bytes = new byte[message_size - 8];
+                     in.readFully(remaining_bytes);
 
-                 //  System.out.println("Received request: api_key=" + request_api_key + ", api_version=" + request_api_version + ", correlation_id=" + request_correlation_id + ", client_id=" + new String(request_client_id));
-                 if(request_api_version<0 || request_api_version>4){
-                     // System.out.println("Unsupported api_version: " + request_api_version);
-                     writeInt(out, 0);
-                     writeInt(out, corelation_id);
-                     writeShort(out, (short)35);
-                     out.flush();
-                 } else {
-                     out.write(ByteBuffer.allocate(4).putInt(19).array());
-                     writeInt(out, corelation_id);
-                     writeShort(out, (short) 0); // error code
-                     writeByte(out, (byte) 2); // array length
-                     writeShort(out, (short)18); // api key
-                     writeShort(out, (short)0); // min api version
-                     writeShort(out, (short)4); // max api version
-                     writeByte(out, (byte)0); // tag buffer
-                     writeInt(out, 0); // throttle time
-                     writeByte(out, (byte)0); // tag buffer
-                     out.flush();
+                     //  System.out.println("Received request: api_key=" + request_api_key + ", api_version=" + request_api_version + ", correlation_id=" + request_correlation_id + ", client_id=" + new String(request_client_id));
+                     if(request_api_version<0 || request_api_version>4){
+                         // System.out.println("Unsupported api_version: " + request_api_version);
+                         writeInt(out, 0);
+                         writeInt(out, corelation_id);
+                         writeShort(out, (short)35);
+                         out.flush();
+                     } else {
+                         out.write(ByteBuffer.allocate(4).putInt(19).array());
+                         writeInt(out, corelation_id);
+                         writeShort(out, (short) 0); // error code
+                         writeByte(out, (byte) 2); // array length
+                         writeShort(out, (short)18); // api key
+                         writeShort(out, (short)0); // min api version
+                         writeShort(out, (short)4); // max api version
+                         writeByte(out, (byte)0); // tag buffer
+                         writeInt(out, 0); // throttle time
+                         writeByte(out, (byte)0); // tag buffer
+                         out.flush();
+                     }
                  }
              }catch (Exception e){
                  e.printStackTrace();
