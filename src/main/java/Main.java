@@ -19,6 +19,10 @@ public class Main {
        serverSocket.setReuseAddress(true);
        // Wait for connection from client.
        clientSocket = serverSocket.accept();
+       long message_size = 0, corelation_id = 7;
+       clientSocket.getOutputStream().write(String.valueOf(message_size).getBytes());
+       clientSocket.getOutputStream().write(String.valueOf(corelation_id).getBytes());
+       clientSocket.getOutputStream().flush();
      } catch (IOException e) {
        System.out.println("IOException: " + e.getMessage());
      } finally {
