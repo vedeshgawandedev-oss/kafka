@@ -43,12 +43,15 @@ public class Main {
              writeShort(out, (short)35);
              out.flush();
          } else {
-             writeInt(out, );
+             writeInt(out,15 );
              writeInt(out, corelation_id);
-             writeShort(out, (short) 0);
-             writeShort(out, (short) 18);
-             writeShort(out, (short)0);
-             writeShort(out, (short)4);
+             writeShort(out, (short) 0); // error code
+             writeShort(out, (short) 1); // array length
+             writeShort(out, (short)18); // api key
+             writeShort(out, (short)4); // min api version
+             writeShort(out, (short)0); // max api version
+             writeByte(out, (byte)1); // tag buffer
+
              out.flush();
          }
      } catch (IOException e) {
@@ -73,6 +76,10 @@ public class Main {
     }
     public static void writeShort(OutputStream out, short value) throws IOException{
         out.write((value >>> 8) & 0xFF);
+        out.write(value & 0xFF);
+    }
+
+    public static void writeByte(OutputStream out, byte value) throws IOException{
         out.write(value & 0xFF);
     }
 }
