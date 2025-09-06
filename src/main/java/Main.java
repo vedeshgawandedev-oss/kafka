@@ -43,10 +43,10 @@ public class Main {
              writeShort(out, (short)35);
              out.flush();
          } else {
-             writeInt(out, 4);
+             writeInt(out, );
              writeInt(out, corelation_id);
-             writeInt(out, 0);
-             writeShort(out, (short)18);
+             writeShort(out, (short) 0);
+             writeShort(out, (short) 18);
              writeShort(out, (short)0);
              writeShort(out, (short)4);
              out.flush();
@@ -71,7 +71,7 @@ public class Main {
         out.write((value >>> 8) & 0xFF);
         out.write(value & 0xFF);
     }
-    public static void writeShort(OutputStream out, int value) throws IOException{
+    public static void writeShort(OutputStream out, short value) throws IOException{
         out.write((value >>> 8) & 0xFF);
         out.write(value & 0xFF);
     }
