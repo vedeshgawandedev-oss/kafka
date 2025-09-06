@@ -24,12 +24,11 @@ public class Main {
        OutputStream out = clientSocket.getOutputStream();
 
        while(true){
-           int message_size = 0, corelation_id = 7;
 
-           message_size = in.readInt();
+           int message_size = in.readInt();
            short request_api_key = in.readShort();
            short request_api_version = in.readShort();
-           int request_correlation_id = in.readInt();
+           int corelation_id = in.readInt();
            // read remaining bytes in the request
               byte[] request_client_id = new byte[message_size - 8];
               in.readFully(request_client_id);
