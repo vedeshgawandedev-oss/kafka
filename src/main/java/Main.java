@@ -34,7 +34,7 @@ public class Main {
             // read the rest of the request
 //            int toRead = reqSize - 2 - 2 - 4 - 2 - request_client_id_length;
 
-
+         System.out.println("Received request: api_key=" + request_api_key + ", api_version=" + request_api_version + ", correlation_id=" + request_correlation_id + ", client_id=" + new String(request_client_id));
          OutputStream out = clientSocket.getOutputStream();
          if(request_api_version<0 || request_api_version>4){
              writeInt(out, message_size);
@@ -45,6 +45,7 @@ public class Main {
              writeInt(out, message_size);
              writeInt(out, corelation_id);
              writeInt(out, 0);
+             out.flush();
          }
      } catch (IOException e) {
        System.out.println("IOException: " + e.getMessage());
