@@ -38,9 +38,12 @@ public class Main {
          OutputStream out = clientSocket.getOutputStream();
          if(request_api_version<0 || request_api_version>4){
              System.out.println("Unsupported api_version: " + request_api_version);
-             writeInt(out, message_size);
+             writeInt(out, 12);
              writeInt(out, corelation_id);
              writeShort(out, (short)35);
+             writeShort(out, (short)18);
+             writeShort(out, (short)0);
+             writeShort(out, (short)4);
              out.flush();
          } else {
              writeInt(out, message_size);
