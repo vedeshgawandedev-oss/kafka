@@ -20,11 +20,13 @@ public class Main {
        serverSocket.setReuseAddress(true);
        // Wait for connection from client.
        clientSocket = serverSocket.accept();
+       DataInputStream in = new DataInputStream(clientSocket.getInputStream());
+       OutputStream out = clientSocket.getOutputStream();
 
        while(true){
            int message_size = 0, corelation_id = 7;
 
-           DataInputStream in = new DataInputStream(clientSocket.getInputStream());
+
            int reqSize = in.readInt();
            short request_api_key = in.readShort();
            short request_api_version = in.readShort();
@@ -37,8 +39,7 @@ public class Main {
            // read the rest of the request
            //            int toRead = reqSize - 2 - 2 - 4 - 2 - request_client_id_length;
 
-           System.out.println("Received request: api_key=" + request_api_key + ", api_version=" + request_api_version + ", correlation_id=" + request_correlation_id + ", client_id=" + new String(request_client_id));
-           OutputStream out = clientSocket.getOutputStream();
+//           System.out.println("Received request: api_key=" + request_api_key + ", api_version=" + request_api_version + ", correlation_id=" + request_correlation_id + ", client_id=" + new String(request_client_id));
            if(request_api_version<0 || request_api_version>4){
                System.out.println("Unsupported api_version: " + request_api_version);
                writeInt(out, 0);
