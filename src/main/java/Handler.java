@@ -19,7 +19,7 @@ public class Handler {
                     byte[] remaining_bytes = new byte[message_size - 8];
                     in.readFully(remaining_bytes);
 
-                    System.out.println("Received request: api_key=" + request_api_key + ", api_version=" + request_api_version + ", correlation_id=" + request_correlation_id + ", client_id=" + new String(request_client_id));
+                    System.out.println("Received request: api_key=" + request_api_key + ", api_version=" + request_api_version + ", correlation_id=" + corelation_id);
                     if(request_api_version<0 || request_api_version>4){
                         // System.out.println("Unsupported api_version: " + request_api_version);
                         writeInt(out, 0);
