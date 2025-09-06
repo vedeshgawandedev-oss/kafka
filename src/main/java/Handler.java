@@ -30,7 +30,7 @@ public class Handler {
                         out.write(ByteBuffer.allocate(4).putInt(19).array());
                         writeInt(out, corelation_id);
                         writeShort(out, (short) 0); // error code
-                        writeByte(out, (byte) 2); // array length
+                        writeByte(out, (byte) 3); // array length
                         writeShort(out, (short)18); // api key
                         writeShort(out, (short)0); // min api version
                         writeShort(out, (short)4); // max api version
