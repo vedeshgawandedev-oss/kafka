@@ -41,14 +41,14 @@ public class Main {
              writeInt(out, 12);
              writeInt(out, corelation_id);
              writeShort(out, (short)35);
-             writeShort(out, (short)18);
-             writeShort(out, (short)0);
-             writeShort(out, (short)4);
              out.flush();
          } else {
              writeInt(out, message_size);
              writeInt(out, corelation_id);
              writeInt(out, 0);
+             writeShort(out, (short)18);
+             writeShort(out, (short)0);
+             writeShort(out, (short)4);
              out.flush();
          }
      } catch (IOException e) {
