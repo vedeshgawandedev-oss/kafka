@@ -1,5 +1,4 @@
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -21,6 +20,23 @@ public class Main {
        // Wait for connection from client.
        clientSocket = serverSocket.accept();
        int message_size = 0, corelation_id = 7;
+
+         DataInputStream in = new DataInputStream(clientSocket.getInputStream();
+         int reqSize = in.readInt();
+         short request_api_key = in.readShort();
+            short request_api_version = in.readShort();
+            int request_correlation_id = in.readInt();
+            int request_client_id_length = in.readShort();
+            byte[] request_client_id = new byte[request_client_id_length];
+            in.readFully(request_client_id);
+//            message_size = reqSize + 4;
+            corelation_id = request_correlation_id;
+            // read the rest of the request
+//            int toRead = reqSize - 2 - 2 - 4 - 2 - request_client_id_length;
+
+
+
+
        OutputStream out = clientSocket.getOutputStream();
        writeInt(out, message_size);
          writeInt(out, corelation_id);
