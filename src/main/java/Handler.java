@@ -37,9 +37,9 @@ public class Handler {
                         writeShort(out, (short)4); // max api version
                         writeByte(out, (byte)0); // tag buffer
 
-                        writeShort(out, (short)18); // api key
+                        writeShort(out, (short)1); // api key
                         writeShort(out, (short)0); // min api version
-                        writeShort(out, (short)4); // max api version
+                        writeShort(out, (short)16); // max api version
                         writeByte(out, (byte)0); // tag buffer
 
                         writeInt(out, 0); // throttle time
