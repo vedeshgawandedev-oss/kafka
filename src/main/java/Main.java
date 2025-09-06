@@ -1,6 +1,7 @@
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.ByteBuffer;
 
 public class Main {
   public static void main(String[] args){
@@ -43,7 +44,7 @@ public class Main {
              writeShort(out, (short)35);
              out.flush();
          } else {
-             writeInt(out,19 );
+             out.write(ByteBuffer.allocate(4).putInt(19).array());
              writeInt(out, corelation_id);
              writeShort(out, (short) 0); // error code
              writeByte(out, (byte) 2); // array length
