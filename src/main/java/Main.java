@@ -20,8 +20,8 @@ public class Main {
        // Wait for connection from client.
        clientSocket = serverSocket.accept();
        int message_size = 0, corelation_id = 7;
-       clientSocket.getOutputStream().write(String.valueOf(message_size).getBytes());
-       clientSocket.getOutputStream().write(String.valueOf(corelation_id).getBytes());
+       clientSocket.getOutputStream().write(message_size);
+       clientSocket.getOutputStream().write(corelation_id);
        clientSocket.getOutputStream().flush();
      } catch (IOException e) {
        System.out.println("IOException: " + e.getMessage());
